@@ -1,3 +1,7 @@
+# 说明
+
+本仓库是 [LinJHS 个人小站](https://linjhs.com) 的主题仓库，从 [halo-theme-hao](https://github.com/chengzhongxue/halo-theme-hao) fork 而来。
+
 <div align="center">
 <!-- 主题Logo -->
 <img width="100px" src="https://api.minio.yyds.pink/moony/files/2024/04/halo-theme-hao-sbxqdmuv.png">
