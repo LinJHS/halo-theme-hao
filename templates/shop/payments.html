@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html
+  xmlns:th="https://www.thymeleaf.org"
+  th:replace="~{modules/layout :: html(title = |支付 - ${site.title}|, content = ~{::content})}"
+>
+  <th:block th:fragment="content">
+    <!--/* 支付模板片段 */-->
+    <th:block th:replace="~{shop/modules/payments}" />
+  </th:block>
+</html>
