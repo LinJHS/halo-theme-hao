@@ -24,6 +24,7 @@
           rel="stylesheet"
           th:href="${not #strings.isEmpty(theme.config.comments.walines.walinesCss) ? theme.config.comments.walines.walinesCss : 'https://cdn.cbd.int/@waline/client@2.15.7/dist/waline.css' }">
     
+    <!-- 商城样式 -->
     <link rel="stylesheet" th:href="@{/assets/css/shop.css}">
     <!--  解决 katex pjax问题 -->
     <script th:if="${pluginFinder.available('plugin-katex')}" defer=""
