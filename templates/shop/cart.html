@@ -5,6 +5,8 @@
 >
   <th:block th:fragment="content">
     <!--/* 购物车模板片段 */-->
-    <th:block th:replace="~{shop/modules/cart}" />
+    <th:block th:fragment="content">
+      <shop-page-cart th:csrfToken="${_csrf.token}"> </shop-page-cart>
+    </th:block>
   </th:block>
 </html>

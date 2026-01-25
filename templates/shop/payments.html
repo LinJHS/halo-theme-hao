@@ -5,6 +5,6 @@
 >
   <th:block th:fragment="content">
     <!--/* 支付模板片段 */-->
-    <th:block th:replace="~{shop/modules/payments}" />
+    <shop-page-payments th:orderCode="${orderCode}" th:csrfToken="${_csrf.token}"> </shop-page-payments>
   </th:block>
 </html>

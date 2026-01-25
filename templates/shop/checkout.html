@@ -5,6 +5,6 @@
 >
   <th:block th:fragment="content">
     <!--/* 结算模板片段 */-->
-    <th:block th:replace="~{shop/modules/checkout}" />
+    <shop-page-checkout th:contextId="${context.id}" th:csrfToken="${_csrf.token}"> </shop-page-checkout>
   </th:block>
 </html>
