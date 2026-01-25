@@ -9,10 +9,7 @@
   <header class="not-top-img" id="page-header">
     <nav th:replace="~{modules/nav-shop :: nav(title = '丘原科技在线商城')}"></nav>
   </header>
-
-  <th:block th:fragment="content">
     <!--/* 商品列表模板片段 */-->
-    
     <div class="shop-entry">
       <div class="shop-entry__header">
         <h1 class="shop-entry__title">商品列表</h1>
@@ -150,9 +147,8 @@
         </a>
       </div>
     </div>
-  </div>
-  </th:block>
   <!-- 底部 -->
   <footer th:replace="~{modules/footer-shop}" />
+  </div>
 </th:block>
 </html>
