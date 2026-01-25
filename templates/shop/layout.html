@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html th:lang="${#locale.toLanguageTag}" th:fragment="html (title, content)" xmlns:th="http://www.thymeleaf.org"
+      th:with="assets_link=${theme.config.other.staticResource.use == 'custom' ? theme.config.other.staticResource.cdn_link : #theme.assets('/')},
+      theme_version = ${ theme.config.other.staticResource.use == 'local' ? '?v='+ theme.spec.version : ''},
+      isLazyload = ${theme.config.other.vanillaLazyload.enable},
+      loadingImg = ${theme.config.other.vanillaLazyload.loadingImg},
+      siteTitle = ${not #strings.isEmpty(title) ?  title  :  #strings.isEmpty(site.subtitle) ? site.title :  site.title +' - ' +site.subtitle }">
+<head>
+    <th:block th:replace="~{modules/head :: head(htmlType = 'shop')}"/>
+    <link rel="stylesheet" th:href="${assets_link + '/css/shop.css' + theme_version}">
+</head>
+<body>
+    <th:block th:replace="~{modules/loading-box}"/>
+    <div class="page" id="body-wrap">
+        <header class="not-top-img" id="page-header">
+            <nav th:replace="~{modules/nav :: nav(title = ${siteTitle})}"></nav>
+        </header>
+        <main class="layout" id="content-inner">
+            <div id="shop-page">
+                <th:block th:replace="${content}" />
+            </div>
+        </main>
+        <footer th:replace="~{modules/footer}"/>
+    </div>
+</body>
+</html>

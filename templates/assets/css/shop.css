@@ -1,0 +1,49 @@
+/* Shop Styling */
+
+/* Main Container for Shop Pages */
+#shop-page {
+    /* Match the single post card style */
+    background: var(--heo-card-bg, #fff);
+    border-radius: 12px;
+    padding: 40px;
+    box-shadow: var(--heo-shadow-border);
+    animation: slide-in 0.6s 0.1s backwards;
+    width: 100%;
+    margin-top: 20px;
+}
+
+/* Ensure images in shop don't overflow */
+#shop-page img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+/* Typography matching theme */
+#shop-page h1, #shop-page h2, #shop-page h3 {
+    color: var(--heo-fontcolor);
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+
+#shop-page p {
+    color: var(--heo-fontcolor);
+    line-height: 1.6;
+}
+
+#shop-page a {
+    color: var(--heo-main);
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+#shop-page a:hover {
+    color: var(--heo-main-color);
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+    #shop-page {
+        padding: 20px;
+    }
+}
