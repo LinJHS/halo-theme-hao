@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html
   xmlns:th="https://www.thymeleaf.org"
-  th:replace="~{shop/layout :: html(title = |结算 - 丘原科技在线商城|, content = ~{::content})}"
+  th:replace="~{shop/layout :: html(title = '结算 - 丘原科技在线商城', htmlType = 'checkout', content = ~{::content})}"
 >
   <th:block th:fragment="content">
     <!--/* 结算模板片段 */-->
