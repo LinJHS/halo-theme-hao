@@ -54,26 +54,9 @@
 
 > 更多插件请参见：https://github.com/halo-sigs/awesome-halo
 
-## 📝 使用
-
-* [新版本主题文档(持续更新中)](https://docs.kunkunyu.com/docs/hao)
-* [老版本主题文档](https://www.yuque.com/liuzhihangs/halo-theme-hao)
-
-## 💬 讨论
-
-如果你对主题有什么建议或者意见，欢迎提 PR & issue。
-
-* 添加企业微信 （备注进群）
-<img width="360" src="https://api.minio.yyds.pink/kunkunyu/files/2025/02/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20250212142105-pbceif.jpg" />
-
-* QQ群
-<img width="360" src="https://api.minio.yyds.pink/kunkunyu/files/2025/05/qq-708998089-iqowsh.webp" />
-
-> 卖服务器的广告人，就不要加了。
-
 ## 🔐 许可
 
-[Halo-Theme-Hao](https://github.com/chengzhongxue/halo-theme-hao) 使用 [GPL-v3.0](./LICENSE) 协议开源，请遵守开源协议。
+[Halo-Theme-Hao](https://github.com/linjhs/halo-theme-hao) 使用 [GPL-v3.0](./LICENSE) 协议开源，请遵守开源协议。
 
 
 
