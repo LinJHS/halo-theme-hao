@@ -628,7 +628,7 @@
 .buy-box__spec-option-zoom {
   opacity:0;
   transition:var(--shop-transition,all .2s ease);
-  background-color:var(--shop-color-base-300,white);
+  background-color:var(--shop-buy-box-spec-option-zoom-bg,white);
   border-radius:var(--shop-border-radius-sm,4px);
   justify-content:center;
   align-items:center;
@@ -651,12 +651,12 @@
   font-size:var(--shop-font-size-sm,14px)
 }
 .buy-box__spec-option--selected {
-  background-color:var(--shop-color-primary,#171717);
-  border-color:var(--shop-color-primary,#171717);
-  color:var(--shop-color-primary-content,white)
+  background-color:var(--shop-buy-box-spec-option-selected-bg);
+  border-color:var(--shop-buy-box-spec-option-selected-border-color);
+  color:var(--shop-buy-box-spec-option-selected-color)
 }
 .buy-box__spec-option--selected.buy-box__spec-option--with-image {
-  background-color:var(--shop-color-base-200);
+  background-color:var(--shop-buy-box-spec-option-selected-with-image-bg);
   color:var(--shop-buy-box-spec-option-selected-with-image-color,#404040)!important
 }
 .buy-box__spec-option--disabled {
