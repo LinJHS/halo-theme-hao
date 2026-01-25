@@ -1,7 +1,7 @@
 apiVersion: theme.halo.run/v1alpha1
 kind: Theme
 metadata:
-  name: theme-hao-linjhs-edition
+  name: theme-hao-linjhs
 spec:
   displayName: Hao (LinJHS Edition)
   author:
@@ -39,11 +39,11 @@ spec:
         file: new_comment.html
 
   description: Halo 2.x Theme base on Thymeleaf, Referring to Butterfly and Heo
-  logo: /themes/theme-hao/assets/images/hao-logo.jpg
+  logo: /themes/theme-hao-linjhs/assets/images/hao-logo.jpg
   homepage: https://github.com/linjhs/halo-theme.git
   issues: https://github.com/linjhs/halo-theme-hao/issues
   repo: https://github.com/linjhs/halo-theme-hao
   settingName: "theme-hao-setting"
   configMapName: "theme-hao-configMap"
-  version: "1.7.0"
+  version: "2.0.1"
   requires: ">=2.22.1"

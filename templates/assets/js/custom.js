@@ -709,12 +709,12 @@ document.addEventListener("DOMContentLoaded", () => {
             constructor() {
                 super();
                 this.options = {
-                    src: this.getAttribute("src") || "",
-                    player:
-                        this.getAttribute("player") ||
-                        `/themes/theme-hao/assets/libs/dplayer/dplayer.html?url=`,
-                    width: this.getAttribute("width") || "100%",
-                    height: this.getAttribute("height") || "500px",
+                  src: this.getAttribute("src") || "",
+                  player:
+                    this.getAttribute("player") ||
+                    `/themes/theme-hao-linjhs/assets/libs/dplayer/dplayer.html?url=`,
+                  width: this.getAttribute("width") || "100%",
+                  height: this.getAttribute("height") || "500px",
                 };
                 this.render();
             }
