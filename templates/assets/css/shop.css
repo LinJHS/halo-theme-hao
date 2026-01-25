@@ -49,6 +49,15 @@
   --shop-shadow-lg:0 10px 15px -3px #0000001a,0 4px 6px -2px #0000000d;
   --shop-transition:all .2s ease
 }
+
+.shop-entry {
+  max-width: 80rem;
+  margin: 0 auto;
+  margin-top: 1.25rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
 .shop-entry__header {
   text-align:left;
   margin-bottom:var(--shop-spacing-xl)
