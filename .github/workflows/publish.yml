@@ -1,0 +1,57 @@
+name: Publish Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Build and Compress
+        run: |
+          # Get version from tag (e.g. v1.0.0 -> 1.0.0)
+          VERSION=${GITHUB_REF#refs/tags/v}
+          echo "Processing version $VERSION"
+          
+          # Prepare artifact name
+          PRE_ZIP_FOLDER=theme-hao-linjhs
+          ARTIFACT_NAME=theme-hao-linjhs-${VERSION}.zip
+          
+          # Create temp folder
+          mkdir $PRE_ZIP_FOLDER
+          
+          # Copy files
+          cp theme.yaml settings.yaml $PRE_ZIP_FOLDER/
+          if [ -f "annotation-setting.yaml" ]; then
+            cp annotation-setting.yaml $PRE_ZIP_FOLDER/
+          fi
+          
+          # Copy templates
+          cp -r templates $PRE_ZIP_FOLDER/
+          
+          # Compress (Note: we cd into the folder to avoid nesting the parent folder)
+          cd $PRE_ZIP_FOLDER
+          zip -r ../$ARTIFACT_NAME ./*
+          cd ..
+          
+          echo "ARTIFACT_PATH=$ARTIFACT_NAME" >> $GITHUB_ENV
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: ${{ env.ARTIFACT_PATH }}
+          draft: false
+          prerelease: false
+          generate_release_notes: true
