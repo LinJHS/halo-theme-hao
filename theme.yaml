@@ -45,7 +45,7 @@ spec:
   repo: https://github.com/linjhs/halo-theme-hao.git
   settingName: "theme-hao-linjhs-setting"
   configMapName: "theme-hao-linjhs-configMap"
-  version: "2.0.14"
+  version: "2.0.15"
   requires: ">=2.22.1"
   license:
     - name: "GPL-3.0"
