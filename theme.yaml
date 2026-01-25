@@ -40,11 +40,13 @@ spec:
 
   description: Halo 2.x Theme base on Thymeleaf, Referring to Butterfly and Heo
   logo: /themes/theme-hao-linjhs/assets/images/hao-logo.jpg
-  homepage: https://github.com/linjhs/halo-theme.git
+  homepage: https://github.com/linjhs/halo-theme-hao
   issues: https://github.com/linjhs/halo-theme-hao/issues
-  repo: https://github.com/linjhs/halo-theme-hao
-  settingName: "theme-hao-setting"
-  configMapName: "theme-hao-configMap"
-  version: "2.0.1"
+  repo: https://github.com/linjhs/halo-theme-hao.git
+  settingName: "theme-hao-linjhs-setting"
+  configMapName: "theme-hao-linjhs-configMap"
+  version: "2.0.2"
   requires: ">=2.22.1"
-  licenses: "GPL-v3.0"
+  licenses:
+    - name: "GPL-3.0"
+      url: "https://github.com/linjhs/halo-theme-hao/blob/main/LICENSE"

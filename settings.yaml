@@ -1,7 +1,7 @@
 apiVersion: v1alpha1
 kind: Setting
 metadata:
-  name: theme-hao-setting
+  name: theme-hao-linjhs-setting
 spec:
   forms:
     - group: basics
