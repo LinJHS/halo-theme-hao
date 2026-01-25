@@ -1,10 +1,19 @@
 <!DOCTYPE html>
-<html th:lang="${#locale.toLanguageTag}" th:fragment="layout(content, htmlType, title, head)" xmlns:th="http://www.thymeleaf.org"
+<html th:lang="${#locale.toLanguageTag}" th:fragment="layout(content, htmlType, title)" xmlns:th="http://www.thymeleaf.org"
       th:with="assets_link=${theme.config.other.staticResource.use == 'custom' ? theme.config.other.staticResource.cdn_link : #theme.assets('/')},
       theme_version = ${ theme.config.other.staticResource.use == 'local' ? '?v='+ theme.spec.version : ''},
       isLazyload = ${theme.config.other.vanillaLazyload.enable},
       loadingImg = ${theme.config.other.vanillaLazyload.loadingImg},
       siteTitle = ${not #strings.isEmpty(title) ?  title  :  #strings.isEmpty(site.subtitle) ? site.title :  site.title +' - ' +site.subtitle }">
+
+<th:block th:fragment="head">
+    <th:block th:replace="~{modules/common/open-graph :: open-graph(_title = ${singlePage.spec.title},
+                _permalink = ${singlePage.status.permalink},
+                _cover = ${singlePage.spec.cover},
+                _excerpt = ${singlePage.status.excerpt},
+                _type = 'website')}"></th:block>
+</th:block>
+
 
 <!-- head 中自定义的  -->
 
@@ -103,11 +112,6 @@
 
 <div th:replace="~{modules/sidebar}"/>
 
-<!-- 左下角音乐 -->
-<th:block th:if="${theme.config.tool.nav_music.nav_musicEnable}">
-    <div th:replace="~{modules/widgets/nav-music}"/>
-</th:block>
-
 <!-- 内容 -->
 <th:block th:replace="${content}"></th:block>
 
@@ -145,9 +149,6 @@
         <th:block th:replace="~{'modules/comment/' + ${use}}"></th:block>
         <script th:if="${theme.config.comments.visitorMail.visitorMailEnable}">var visitorMail = "[(${theme.config.comments.visitorMail.mail})]";</script>
     </th:block>
-    
-    <!--音乐-->
-    <script>var meting_api = "[(${theme.config.tool.nav_music.meting_api})]"; </script>
     
     <!-- 深色模式下添加粒子效果canvas -->
     <canvas th:if="${theme.config.style.universe}" id="universe" width="1312" height="880"></canvas>
@@ -289,10 +290,6 @@
     
     //页脚友联
     GLOBAL_CONFIG.isFriendLinksInFooter && heo.addFriendLinksInFooter()
-    //音乐页面切换歌曲调用
-    if (GLOBAL_CONFIG.isMusic) {
-        heo.changeMusicBg(false);
-    }
     //代码块
     if (GLOBAL_CONFIG.prism.enable) {
         halo.addPrismTool()
