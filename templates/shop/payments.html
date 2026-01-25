@@ -4,7 +4,16 @@
   th:replace="~{shop/layout :: html(title = '支付 - 丘原科技在线商城', htmlType = 'payments', content = ~{::content})}"
 >
   <th:block th:fragment="content">
+  <div class="page" id="body-wrap">
+    <header class="not-top-img" id="page-header">
+      <nav
+        th:replace="~{modules/nav-shop :: nav(title = '丘原科技在线商城')}"
+      ></nav>
+    </header>
     <!--/* 支付模板片段 */-->
     <shop-page-payments th:orderCode="${orderCode}" th:csrfToken="${_csrf.token}"> </shop-page-payments>
+  <!-- 底部 -->
+  <footer th:replace="~{modules/footer-shop}" />
+  </div>
   </th:block>
 </html>

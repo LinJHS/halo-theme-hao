@@ -54,9 +54,9 @@
   max-width: 80rem;
   margin: 0 auto;
   margin-top: 1.25rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  min-height: calc(100vh - 60px - 94px);
+  padding-left: 3rem;
+  padding-right: 3rem;
+  min-height: calc(100vh - 130px);
 }
 
 .shop-entry__header {

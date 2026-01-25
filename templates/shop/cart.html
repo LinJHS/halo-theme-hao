@@ -4,9 +4,18 @@
   th:replace="~{shop/layout :: html(title = '购物车 - 丘原科技在线商城', htmlType = 'cart', content = ~{::content})}"
 >
   <th:block th:fragment="content">
+  <div class="page" id="body-wrap">
+    <header class="not-top-img" id="page-header">
+      <nav
+        th:replace="~{modules/nav-shop :: nav(title = '丘原科技在线商城')}"
+      ></nav>
+    </header>
     <!--/* 购物车模板片段 */-->
     <th:block th:fragment="content">
       <shop-page-cart th:csrfToken="${_csrf.token}"> </shop-page-cart>
     </th:block>
+  <!-- 底部 -->
+  <footer th:replace="~{modules/footer-shop}" />
+  </div>
   </th:block>
 </html>

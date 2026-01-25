@@ -4,6 +4,7 @@
   th:replace="~{shop/layout :: html(title = '商店 - 丘原科技在线商城', htmlType = 'products', content = ~{::content})}"
 >
 <th:block th:fragment="content">
+<div class="page" id="body-wrap">
   <!-- 头部导航栏 -->
   <header class="not-top-img" id="page-header">
     <nav th:replace="~{modules/nav-shop :: nav(title = '丘原科技在线商城')}"></nav>
@@ -149,6 +150,7 @@
         </a>
       </div>
     </div>
+  </div>
   </th:block>
   <!-- 底部 -->
   <footer th:replace="~{modules/footer-shop}" />
