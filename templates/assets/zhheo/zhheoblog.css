@@ -17669,11 +17669,13 @@ a#toPageButton.haveValue:hover {
 
 /*   code样式 */
 code:not([class]) {
-    color: var(--heo-white);
+    /* color: var(--heo-white); */
+    color: var(--heo-theme);
     padding: 0.25rem 0.4rem;
     border-radius: 4px;
     margin: 0px 4px;
-    background: var(--heo-pink);
+    /* background: var(--heo-pink); */
+    background: var(--heo-theme-op);
     line-height: 2;
     box-shadow: var(--heo-shadow-border);
     font-size: 17.5px;
