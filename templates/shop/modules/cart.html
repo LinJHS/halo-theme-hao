@@ -1,9 +1,0 @@
-<!DOCTYPE html>
-<html
-  xmlns:th="https://www.thymeleaf.org"
-  th:replace="~{modules/layout :: html(title = |购物车 - ${site.title}|, content = ~{::content})}"
->
-  <th:block th:fragment="content">
-    <shop-page-cart th:csrfToken="${_csrf.token}"> </shop-page-cart>
-  </th:block>
-</html>
