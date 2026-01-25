@@ -51,7 +51,6 @@
 }
 
 [data-theme="dark"] {
-  // 现在，需要将下面所有颜色反转到暗色模式的对应颜色
   --shop-color-base-100:#171717;
   --shop-color-base-200:#262626;
   --shop-color-base-300:#404040;
@@ -461,9 +460,9 @@
   align-items:center;
   gap:var(--shop-spacing-xs,8px);
   font-size:var(--shop-font-size-base,16px);
-  color:var(--shop-gray-700,#404040);
-  background-color:var(--shop-color-base-100,white);
-  border:1px solid var(--shop-gray-300,#d4d4d4);
+  color:var(--shop-gray-700);
+  background-color:var(--shop-color-base-100);
+  border:1px solid var(--shop-gray-300);
   border-radius:var(--shop-border-radius,8px);
   cursor:pointer;
   transition:var(--shop-transition,all .2s ease);
@@ -471,7 +470,7 @@
   display:flex
 }
 .buy-box__spec-option:hover:not(:disabled) {
-  border-color:var(--shop-gray-500,#737373)
+  border-color:var(--shop-gray-500)
 }
 .buy-box__spec-option--with-image {
   gap:var(--shop-spacing-xs,6px);
@@ -516,16 +515,16 @@
   font-size:var(--shop-font-size-sm,14px)
 }
 .buy-box__spec-option--selected {
-  background-color:var(--shop-color-primary,#171717);
-  border-color:var(--shop-color-primary,#171717);
-  color:var(--shop-color-primary-content,white)
+  background-color:var(--shop-color-primary);
+  border-color:var(--shop-color-primary);
+  color:var(--shop-color-primary-content)
 }
 .buy-box__spec-option--selected.buy-box__spec-option--with-image {
   background-color:var(--shop-color-base-200);
-  color:var(--shop-gray-700,#404040)!important
+  color:var(--shop-gray-700)!important
 }
 .buy-box__spec-option--disabled {
-  color:var(--shop-gray-400,#a3a3a3);
+  color:var(--shop-gray-400);
   cursor:not-allowed;
   opacity:.5
 }
@@ -537,10 +536,10 @@
 }
 .buy-box__stock {
   font-size:var(--shop-font-size-sm,14px);
-  color:var(--shop-gray-700,#404040)
+  color:var(--shop-gray-700);
 }
 .buy-box__stock-value {
-  color:var(--shop-color-success,#45544a);
+  color:var(--shop-color-success);
   font-weight:600
 }
 .buy-box__quantity {
@@ -550,13 +549,13 @@
 }
 .buy-box__quantity-label {
   font-size:var(--shop-font-size-base,16px);
-  color:var(--shop-gray-900,#171717);
+  color:var(--shop-gray-900);
   font-weight:600
 }
 .buy-box__actions {
   gap:var(--shop-spacing-md,16px);
   padding-top:var(--shop-spacing-md,16px);
-  border-top:1px solid var(--shop-gray-200,#e6e6e6);
+  border-top:1px solid var(--shop-gray-200);
   display:flex
 }
 .buy-box__actions form {
