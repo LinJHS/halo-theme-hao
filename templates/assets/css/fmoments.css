@@ -58,11 +58,28 @@
 }
 
 .fMomentsStatIcon {
+  line-height: 1;
   font-size: 24px;
   margin-bottom: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.fMomentsStatIcon svg {
+  width: 28px;
+  height: 28px;
+  color: var(--heo-main);
+  transition: all 0.3s ease;
+}
+
+.fMomentsStatCard:hover .fMomentsStatIcon svg {
+  transform: scale(1.1);
+  color: var(--heo-blue);
 }
 
 .fMomentsStatNumber {
+  line-height: 1.2;
   font-size: 24px;
   font-weight: 700;
   color: var(--heo-fontcolor);
@@ -125,6 +142,16 @@
   transform: translateY(-50%);
   color: var(--heo-secondtext);
   font-size: 16px;
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fMomentsSearchIcon svg {
+  width: 100%;
+  height: 100%;
 }
 
 .fMomentsFilterGroup {
@@ -538,6 +565,11 @@
     margin-bottom: 6px;
   }
   
+  .fMomentsStatIcon svg {
+    width: 24px;
+    height: 24px;
+  }
+  
   .fMomentsStatNumber {
     font-size: 20px;
     margin-bottom: 3px;
@@ -601,6 +633,11 @@
     margin-bottom: 4px;
   }
   
+  .fMomentsStatIcon svg {
+    width: 20px;
+    height: 20px;
+  }
+  
   .fMomentsStatNumber {
     font-size: 18px;
     margin-bottom: 2px;
@@ -661,6 +698,11 @@
   
   .fMomentsStatIcon {
     font-size: 16px;
+  }
+  
+  .fMomentsStatIcon svg {
+    width: 18px;
+    height: 18px;
   }
   
   .fMomentsStatNumber {
