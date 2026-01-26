@@ -107,55 +107,95 @@
 
 /* 控制面板 */
 .fMomentsControlPanel {
-  background: var(--heo-card-bg);
-  border-radius: 16px;
-  padding: 24px;
-  margin: 20px 0;
-  box-shadow: var(--heo-shadow-border);
+  background: linear-gradient(135deg, var(--heo-card-bg) 0%, var(--heo-secondbg) 100%);
+  border-radius: 20px;
+  padding: 28px;
+  margin: 24px 0;
+  box-shadow: var(--heo-shadow-border), 0 8px 24px rgba(0, 0, 0, 0.06);
   border: var(--style-border);
   display: flex;
   flex-wrap: wrap;
-  gap: 16px;
+  gap: 20px;
   align-items: center;
   justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.fMomentsControlPanel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--heo-main), var(--heo-blue), var(--heo-main));
+  background-size: 200% 100%;
+  animation: gradient-shift 3s ease infinite;
+}
+
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.fMomentsControlPanel:hover {
+  box-shadow: var(--heo-shadow-border), 0 12px 32px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
 }
 
 .fMomentsSearchBox {
   flex: 1;
-  min-width: 250px;
+  min-width: 280px;
   position: relative;
 }
 
 .fMomentsSearchInput {
   width: 100%;
-  padding: 14px 16px 14px 44px;
+  padding: 16px 20px 16px 48px;
   border: 2px solid var(--heo-border-color);
-  border-radius: 28px;
-  background: var(--heo-secondbg);
+  border-radius: 30px;
+  background: var(--heo-card-bg);
   color: var(--heo-fontcolor);
-  font-size: 14px;
-  transition: all 0.3s ease;
+  font-size: 15px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   font-family: inherit;
+  font-weight: 500;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.fMomentsSearchInput:hover {
+  border-color: var(--heo-main);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 .fMomentsSearchInput:focus {
   outline: none;
   border-color: var(--heo-main);
-  box-shadow: 0 0 0 3px rgba(var(--heo-main-rgb), 0.1);
+  box-shadow: 0 0 0 4px rgba(var(--heo-main-rgb), 0.15), 0 6px 16px rgba(0, 0, 0, 0.1);
+  transform: translateY(-1px);
+}
+
+.fMomentsSearchInput::placeholder {
+  color: var(--heo-secondtext);
+  font-weight: 400;
 }
 
 .fMomentsSearchIcon {
   position: absolute;
-  left: 16px;
+  left: 18px;
   top: 50%;
   transform: translateY(-50%);
-  color: var(--heo-secondtext);
-  font-size: 16px;
-  width: 16px;
-  height: 16px;
+  color: var(--heo-main);
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: all 0.3s ease;
+  pointer-events: none;
 }
 
 .fMomentsSearchIcon svg {
@@ -163,39 +203,80 @@
   height: 100%;
 }
 
+.fMomentsSearchBox:hover .fMomentsSearchIcon {
+  transform: translateY(-50%) scale(1.1);
+  color: var(--heo-blue);
+}
+
 .fMomentsFilterGroup {
   display: flex;
-  gap: 12px;
+  gap: 14px;
   align-items: center;
   flex-wrap: wrap;
 }
 
 .fMomentsSelect {
-  padding: 12px 16px;
+  padding: 13px 20px;
   border: 2px solid var(--heo-border-color);
-  border-radius: 24px;
-  background: var(--heo-secondbg);
+  border-radius: 26px;
+  background: var(--heo-card-bg);
   color: var(--heo-fontcolor);
   font-size: 14px;
+  font-weight: 500;
   cursor: pointer;
-  transition: all 0.3s ease;
-  min-width: 130px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  min-width: 140px;
   font-family: inherit;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  position: relative;
+}
+
+.fMomentsSelect:hover {
+  border-color: var(--heo-main);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
 }
 
 .fMomentsSelect:focus {
   outline: none;
   border-color: var(--heo-main);
-  box-shadow: 0 0 0 3px rgba(var(--heo-main-rgb), 0.1);
+  box-shadow: 0 0 0 4px rgba(var(--heo-main-rgb), 0.15), 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+.fMomentsSelect:active {
+  transform: translateY(0);
 }
 
 .fMomentsToggle {
   display: flex;
   align-items: center;
-  gap: 12px;
-  font-size: 14px;
+  gap: 10px;
+  font-size: 13px;
   color: var(--heo-fontcolor);
-  font-weight: 500;
+  font-weight: 600;
+  padding: 8px 16px;
+  background: var(--heo-card-bg);
+  border-radius: 24px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  transition: all 0.3s ease;
+}
+
+.fMomentsToggle:hover {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.fMomentsToggle span {
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.fMomentsToggle span:first-child {
+  color: var(--heo-secondtext);
+}
+
+.fMomentsToggle span:last-child {
+  color: var(--heo-main);
+  font-weight: 700;
 }
 
 .fMomentsSwitch {
