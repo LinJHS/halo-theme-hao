@@ -214,7 +214,7 @@
 .fMomentsSwitch {
   position: relative;
   width: 52px;
-  height: 28px;
+  height: 18px;
   background: var(--heo-border-color);
   border-radius: 28px;
   cursor: pointer;
