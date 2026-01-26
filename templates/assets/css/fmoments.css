@@ -256,7 +256,7 @@
 }
 
 .fMomentsSwitch.active::after {
-  transform: translateX(24px);
+  transform: translateX(20px);
 }
 
 /* 显示数量状态 */
