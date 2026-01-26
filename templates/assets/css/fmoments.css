@@ -197,6 +197,23 @@
   box-shadow: 0 0 0 3px rgba(var(--heo-main-rgb), 0.1);
 }
 
+.fMomentsSelect option {
+  padding: 12px 16px;
+  background: var(--heo-card-bg);
+  color: var(--heo-fontcolor);
+  font-size: 14px;
+  line-height: 1.6;
+  border-radius: 8px;
+  margin: 4px 0;
+}
+
+.fMomentsSelect option:hover,
+.fMomentsSelect option:checked {
+  background: var(--heo-main);
+  color: var(--heo-white);
+  font-weight: 500;
+}
+
 .fMomentsToggle {
   display: flex;
   align-items: center;
