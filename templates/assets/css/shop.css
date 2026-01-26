@@ -85,11 +85,10 @@
 }
 
 .shop-entry {
-  max-width: 80rem;
+  max-width: 1400px;
   margin: 0 auto;
   margin-top: 1.25rem;
-  padding-left: 3rem;
-  padding-right: 3rem;
+  padding: 0 1.5rem;
   min-height: calc(100vh - 190px);
 }
 
