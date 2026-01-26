@@ -37,9 +37,13 @@
          th:with="currentUser = ${contributorFinder.getContributor(#authentication.name)}">
         <span class="site-page nav-login">
             <i sec:authorize="isAnonymous()" class="haofont hao-icon-zhanghao1 " style="font-size: 19.5px;"></i>
-            <img sec:authorize="isAuthenticated()"  th:src="${currentUser.avatar}"
-                 th:alt="${currentUser.displayName}"
-                 style=" width: 24px; height: 24px; border-radius: 9999px" />
+            <!-- 根据用户是否设置头像，填充不同的内容 -->
+            <th:block sec:authorize="isAuthenticated()">
+                <img th:if="${currentUser.avatar != null and currentUser.avatar != ''}" th:src="${currentUser.avatar}"
+                     th:alt="${currentUser.displayName}"
+                     style=" width: 24px; height: 24px; border-radius: 9999px" />
+                <i th:if="${currentUser.avatar == null or currentUser.avatar == ''}" class="haofont hao-icon-zhanghao1" style="font-size: 19.5px; color: #555fe6;"></i>
+            </th:block>
         </span>
         <div class="back-menu-list-groups">
             <div class="back-menu-list-group" style="margin: -4px -9px -4px -18px">
