@@ -9,6 +9,15 @@
   animation: slideInUp 0.6s ease-out;
 }
 
+#fMomentsMessageBoard .fMomentsTitle {
+  font-size: 28px;
+  line-height: 1.2;
+  font-weight: bold;
+  color: var(--heo-fontcolor);
+  text-align: center;
+  margin-bottom: 6px;
+}
+
 .fMomentsUpdatedTime {
   text-align: center;
   padding: 8px 0;
