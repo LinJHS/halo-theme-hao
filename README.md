@@ -1,6 +1,6 @@
 # 说明
 
-本仓库是 [LinJHS 个人小站](https://linjhs.com) 的主题仓库，从 [halo-theme-hao](https://github.com/chengzhongxue/halo-theme-hao) fork 而来。
+本仓库是 [LinJHS 个人小站](https://linjhs.com) 的主题仓库，从 [halo-theme-hao](https://github.com/chengzhongxue/halo-theme-hao) fork 而来。感谢原仓库的贡献者们！
 
 <div align="center">
 <!-- 主题Logo -->
