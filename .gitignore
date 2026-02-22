@@ -199,3 +199,5 @@ $RECYCLE.BIN/
 # Batch file
 *.bat
 theme-hao-linjhs\*
+
+.agent

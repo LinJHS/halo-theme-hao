@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html th:lang="${#locale.toLanguageTag}" th:fragment="layout(title, head, body)" xmlns:th="http://www.thymeleaf.org">
+
+<!-- 引用浩主题的全局 layout -->
+<th:block
+    th:replace="~{modules/layouts/layout :: layout(content = ~{::authContent}, htmlType = 'auth', title = ${title}, head = ~{::authHead})}">
+
+    <!-- 附加给 head 的内容，包含认证所需的 Halo 默认静态资源 -->
+    <th:block th:fragment="authHead">
+        <th:block th:replace="~{gateway_fragments/common::basicStaticResources}"></th:block>
+        <th:block th:if="${head != null}">
+            <th:block th:replace="${head}" />
+        </th:block>
+        <style>
+            /* 调整表单的基本样式以适配由于引入 Hao 导致的一些冲突或者不协调 */
+            .auth-container {
+                max-width: 400px;
+                margin: 50px auto;
+                background: var(--heo-card-bg);
+                padding: 30px;
+                border-radius: 12px;
+                box-shadow: var(--heo-shadow-border);
+            }
+
+            .auth-container .halo-form-wrapper {
+                margin: 0;
+            }
+
+            .auth-container .gateway-wrapper {
+                padding: 0;
+                background: transparent;
+                box-shadow: none;
+            }
+
+            .auth-container input {
+                background: var(--heo-background);
+                color: var(--heo-fontcolor);
+            }
+
+            .auth-container button[type="submit"] {
+                background: var(--heo-main);
+                color: var(--heo-white);
+                border: none;
+                padding: 10px 20px;
+                border-radius: 8px;
+                cursor: pointer;
+                transition: 0.3s;
+            }
+
+            .auth-container button[type="submit"]:hover {
+                background: var(--heo-main-op-deep);
+            }
+
+            .auth-container .halo-logo {
+                display: none;
+            }
+
+            .auth-agreement {
+                margin-top: 20px;
+                text-align: center;
+                font-size: 13px;
+                color: var(--heo-fontcolor);
+                opacity: 0.8;
+            }
+
+            .auth-agreement a {
+                color: var(--heo-main);
+                text-decoration: none;
+                transition: 0.3s;
+            }
+
+            .auth-agreement a:hover {
+                color: var(--heo-main-op-deep);
+            }
+        </style>
+    </th:block>
+
+    <!-- 附加给 content 的内容，即页面主内容区域 -->
+    <th:block th:fragment="authContent">
+        <main class="layout" id="content-inner">
+            <div id="page">
+                <h1 class="page-title" th:text="${title}">认证</h1>
+                <div class="auth-container">
+                    <th:block th:replace="${body}" />
+                    <div class="auth-agreement">
+                        登录或注册即充分理解并同意
+                        <a href="/terms" target="_blank">《用户协议》</a>
+                        和
+                        <a href="/privacy" target="_blank">《隐私条款》</a>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </th:block>
+
+</th:block>
+
+</html>
