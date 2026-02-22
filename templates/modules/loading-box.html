@@ -1,6 +1,5 @@
 <!-- loading页面 -->
-<th:block
-          th:if="${theme.config.other.loadingBoxs.loadingBoxEnable} and not ${#strings.isEmpty(theme.config.other.loadingBoxs.loadingBoxImg)}">
+<th:block th:if="${theme.config.other.loadingBoxs.loadingBoxEnable}">
     <style type="text/css">
         #loading-box {
             -webkit-user-select: none;
@@ -25,37 +24,43 @@
             animation: hideLoading 0.3s 0s forwards;
         }
 
-        #loading-box .loading-img {
-            width: 100px;
+        /* 页面加载动画元素容器 */
+        #loading-box .spinner {
+            width: 50px;
+            height: 50px;
             margin: auto;
-            animation-duration: 0.2s;
-            animation-name: loadingAction;
-            animation-iteration-count: infinite;
-            animation-direction: alternate;
+            position: relative;
         }
 
-        #loading-box .loading-image-dot {
-            width: 30px;
-            height: 30px;
-            background: #6bdf8f;
-            position: absolute;
+        /* 两个交错缩放的圆形 */
+        #loading-box .spinner .bounce1,
+        #loading-box .spinner .bounce2 {
+            width: 100%;
+            height: 100%;
             border-radius: 50%;
-            border: 6px solid #fff;
-            top: 50%;
-            left: 50%;
-            -webkit-transform: translate(18px, 24px);
-            -moz-transform: translate(18px, 24px);
-            -o-transform: translate(18px, 24px);
-            -ms-transform: translate(18px, 24px);
-            transform: translate(18px, 24px);
+            background-color: var(--heo-main, #6bdf8f);
+            opacity: 0.6;
+            position: absolute;
+            top: 0;
+            left: 0;
+            animation: bounce 2s infinite ease-in-out;
         }
 
-        @keyframes loadingAction {
-            from {
-                opacity: 1;
+        /* 第二个圆形延迟产生交错效果 */
+        #loading-box .spinner .bounce2 {
+            animation-delay: -1.0s;
+        }
+
+        /* 缩放动画关键帧 */
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: scale(0);
             }
-            to {
-                opacity: 0.6;
+
+            50% {
+                transform: scale(1);
             }
         }
 
@@ -63,6 +68,7 @@
             from {
                 opacity: 1;
             }
+
             to {
                 opacity: 0;
             }
@@ -72,15 +78,19 @@
             from {
                 opacity: 0;
             }
+
             to {
                 opacity: 1;
             }
         }
     </style>
+    <!-- 页面加载动画外层容器 -->
     <div id="loading-box" onclick="heo.hideLoading()">
         <div class="loading-bg">
-            <img class="loading-img" style="border-radius: 50%;" th:src="${theme.config.other.loadingBoxs.loadingBoxImg}">
-            <div class="loading-image-dot"></div>
+            <div class="spinner">
+                <div class="bounce1"></div>
+                <div class="bounce2"></div>
+            </div>
         </div>
     </div>
     <script>
