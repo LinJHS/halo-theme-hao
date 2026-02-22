@@ -1,169 +1,97 @@
-<!DOCTYPE html>
-<html th:lang="${#locale.toLanguageTag}" th:fragment="layout(title, head, body)" xmlns:th="http://www.thymeleaf.org"
-    th:with="assets_link=${theme.config.other.staticResource.use == 'custom' ? theme.config.other.staticResource.cdn_link : #theme.assets('/')},
-      theme_version = ${ theme.config.other.staticResource.use == 'local' ? '?v='+ theme.spec.version : ''}">
+<!doctype html>
+<html th:lang="${#locale.toLanguageTag}" th:fragment="layout (title,head,body)"
+  th:with="assets_link=${theme.config.other.staticResource.use == 'custom' ? theme.config.other.staticResource.cdn_link : #theme.assets('/')},
+               isLazyload=${theme.config.other.vanillaLazyload.enable != null ? theme.config.other.vanillaLazyload.enable : false}">
 
 <head>
-    <meta charset="UTF-8">
-    <meta content="IE=edge" http-equiv="X-UA-Compatible">
-    <meta content="width=device-width,initial-scale=1" name="viewport">
-    <meta content="telephone=no" name="format-detection">
-    <meta content="var(--heo-card-bg)" name="theme-color">
-    <title th:text="${title}"></title>
+  <meta charset="UTF-8" />
+  <meta content="IE=edge" http-equiv="X-UA-Compatible" />
+  <meta content="webkit" name="renderer" />
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"
+    name="viewport" />
+  <meta content="noindex,nofollow" name="robots" />
+  <title th:text="${title}"></title>
+  <link rel="preload" href="/images/wordmark.svg" as="image" type="image/svg+xml" />
+  <link rel="preload" href="/images/logo.png" as="image" type="image/png" />
+  <link rel="stylesheet" th:href="${assets_link + '/zhheo/zhheoblog.css' + theme_version}">
 
-    <link rel="shortcut icon" th:href="${assets_link + '/images/hao-logo.jpg'}" />
+  <th:block th:replace="~{gateway_fragments/common::basicStaticResources}"></th:block>
 
-    <!-- Halo Auth 基础资源 -->
-    <th:block th:replace="~{gateway_fragments/common::basicStaticResources}"></th:block>
+  <th:block th:if="${head != null}">
+    <th:block th:replace="${head}" />
+  </th:block>
 
-    <!-- Hao Theme 必要样式 -->
-    <link rel="stylesheet" th:href="${assets_link + '/zhheo/zhheoblog.css' + theme_version}">
-    <link rel="stylesheet" th:href="${assets_link + '/zhheo/custom.css' + theme_version}">
-    <link rel="stylesheet" th:href="${assets_link + '/icon/iconfont.css' + theme_version}">
+  <style>
+    .auth-agreement {
+      margin-top: 10px;
+      text-align: center;
+      font-size: 13px;
+      color: var(--color-text);
+      opacity: 0.8;
+    }
 
+    .auth-agreement a {
+      color: var(--color-primary);
+      text-decoration: none;
+      transition: 0.3s;
+    }
 
+    .auth-agreement a:hover {
+      color: var(--color-primary-hover, #0056b3);
+    }
 
-    <!-- 网关传入的 head -->
-    <th:block th:if="${head != null}">
-        <th:block th:replace="${head}" />
-    </th:block>
+    .gateway-page {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      background: var(--heo-background);
+    }
 
-    <style>
-        body {
-            background-color: var(--heo-background);
-            color: var(--heo-fontcolor);
-            margin: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-        }
+    /* 页面拉通防止页脚浮空 */
 
-        .auth-container {
-            width: 100%;
-            max-width: 400px;
-            background: var(--heo-card-bg);
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: var(--heo-shadow-border);
-            margin: 20px;
-            z-index: 10;
-        }
+    .gateway-wrapper {
+      flex: 1;
+    }
 
-        .auth-container .halo-form-wrapper {
-            margin: 0;
-        }
-
-        .auth-container .gateway-wrapper {
-            padding: 0;
-            background: transparent;
-            box-shadow: none;
-        }
-
-        /* 覆盖 Halo 默认在登录页面的表单样式为主题样式 */
-        .auth-container input {
-            background: var(--heo-background);
-            color: var(--heo-fontcolor);
-            border: 1px solid var(--heo-border);
-        }
-
-        .auth-container button[type="submit"] {
-            background: var(--heo-main);
-            color: var(--heo-white);
-            border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: 0.3s;
-            width: 100%;
-        }
-
-        .auth-container button[type="submit"]:hover {
-            background: var(--heo-main-op-deep);
-        }
-
-        .auth-container .halo-logo {
-            display: flex;
-        }
-
-        /* 处理全局背景图片 */
-        .global_background_img {
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            opacity: 1;
-            position: fixed;
-            z-index: -999;
-            background: var(--heo-background);
-            background-attachment: fixed;
-            background-repeat: no-repeat;
-            background-size: cover;
-        }
-
-        /* 用户协议与隐私条款样式 */
-        .auth-agreement {
-            margin-top: 20px;
-            text-align: center;
-            font-size: 13px;
-            color: var(--heo-fontcolor);
-            opacity: 0.8;
-        }
-
-        .auth-agreement a {
-            color: var(--heo-main);
-            text-decoration: none;
-            transition: 0.3s;
-        }
-
-        .auth-agreement a:hover {
-            color: var(--heo-main-op-deep);
-        }
-    </style>
+    #footer {
+      margin-top: auto;
+    }
+  </style>
 </head>
 
-<body>
-    <!-- 根据配置设置 css 变量值，全局 css 通过变量值进行处理以自适应深色浅色模式 -->
-    <th:block th:replace="~{modules/variables/layout}"></th:block>
+<body class="gateway-page">
+  <div class="gateway-wrapper">
+    <th:block th:replace="${body}" />
 
-    <!-- 独立背景，避免复杂逻辑 -->
-    <div id="web_bg">
-        <div th:if="${theme.config.top.global_background.enable_global_background_img}">
-            <img class="global_background_img" th:src="${theme.config.top.global_background.global_background_img}" />
-        </div>
+    <!-- 用户协议与隐私条款 -->
+    <div class="auth-agreement" id="auth-agreement" style="display: none;">
+      登录或注册即充分理解并同意
+      <a href="/terms" target="_blank">《用户协议》</a>
+      和
+      <a href="/privacy" target="_blank">《隐私条款》</a>
     </div>
 
-    <!-- 认证主体容器 -->
-    <div class="auth-container">
-        <!-- 核心表单内容区 -->
-        <th:block th:replace="${body}" />
-
-        <!-- 协议与条款 -->
-        <div class="auth-agreement">
-            登录或注册即充分理解并同意
-            <a href="/terms" target="_blank">《用户协议》</a>
-            和
-            <a href="/privacy" target="_blank">《隐私条款》</a>
-        </div>
-    </div>
-
-    <!-- 简易的深浅模式支持 -->
+    <!-- 利用原生 JS 在组件挂载后，自动将协议提示符挪动到按钮下方以维持页面原有 DOM 结构安全 -->
     <script>
-        (function () {
-            try {
-                const t = JSON.parse(localStorage.getItem('theme'))?.value;
-                if (t === 'dark' || (!t && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-                    document.documentElement.setAttribute('data-theme', 'dark');
-                    document.documentElement.classList.add('color-scheme-dark');
-                }
-            } catch (e) {
-                // Ignore parsing errors
-                if (localStorage.getItem('theme') === 'dark') {
-                    document.documentElement.setAttribute('data-theme', 'dark');
-                }
-            }
-        })();
+      document.addEventListener("DOMContentLoaded", function () {
+        var submitBtn = document.querySelector('form button[type="submit"]');
+        var agreement = document.getElementById('auth-agreement');
+        if (submitBtn && agreement) {
+          var formItem = submitBtn.closest('.form-item');
+          if (formItem) {
+            formItem.parentNode.insertBefore(agreement, formItem.nextSibling);
+          } else {
+            submitBtn.parentNode.insertBefore(agreement, submitBtn.nextSibling);
+          }
+          // 移动完成后再显示，避免页面闪烁
+          agreement.style.display = 'block';
+        }
+      });
     </script>
+  </div>
+
+  <!-- 追加原主题配置好的页面底部 Footer -->
+  <th:block th:replace="~{modules/footer}" />
 </body>
 
 </html>
