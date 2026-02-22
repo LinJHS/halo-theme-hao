@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html th:lang="${#locale.toLanguageTag}" th:fragment="layout(title, head, body)" xmlns:th="http://www.thymeleaf.org"
     th:with="assets_link=${theme.config.other.staticResource.use == 'custom' ? theme.config.other.staticResource.cdn_link : #theme.assets('/')},
-      theme_version = ${ theme.config.other.staticResource.use == 'local' ? '?v='+ theme.spec.version : ''},
-      siteTitle = ${not #strings.isEmpty(title) ?  title  :  #strings.isEmpty(site.subtitle) ? site.title :  site.title +' - ' +site.subtitle }">
+      theme_version = ${ theme.config.other.staticResource.use == 'local' ? '?v='+ theme.spec.version : ''}">
 
 <head>
     <meta charset="UTF-8">
@@ -10,10 +9,9 @@
     <meta content="width=device-width,initial-scale=1" name="viewport">
     <meta content="telephone=no" name="format-detection">
     <meta content="var(--heo-card-bg)" name="theme-color">
-    <title th:text="${siteTitle}"></title>
+    <title th:text="${title}"></title>
 
-    <link rel="shortcut icon"
-        th:href="@{${#strings.isEmpty(site.favicon) ? assets_link + '/images/hao-logo.jpg' : site.favicon}}" />
+    <link rel="shortcut icon" th:href="${assets_link + '/images/hao-logo.jpg'}" />
 
     <!-- Halo Auth 基础资源 -->
     <th:block th:replace="~{gateway_fragments/common::basicStaticResources}"></th:block>
@@ -23,8 +21,7 @@
     <link rel="stylesheet" th:href="${assets_link + '/zhheo/custom.css' + theme_version}">
     <link rel="stylesheet" th:href="${assets_link + '/icon/iconfont.css' + theme_version}">
 
-    <!-- Hao 配置注入 -->
-    <th:block th:replace="~{modules/variables/site-config}" />
+
 
     <!-- 网关传入的 head -->
     <th:block th:if="${head != null}">
@@ -127,7 +124,7 @@
 
 <body>
     <!-- 根据配置设置 css 变量值，全局 css 通过变量值进行处理以自适应深色浅色模式 -->
-    <th:block th:replace="~{'modules/variables/layout'}"></th:block>
+    <th:block th:replace="~{modules/variables/layout}"></th:block>
 
     <!-- 独立背景，避免复杂逻辑 -->
     <div id="web_bg">
