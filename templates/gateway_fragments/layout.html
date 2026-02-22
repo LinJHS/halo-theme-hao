@@ -47,9 +47,8 @@
       background: var(--heo-background);
     }
 
-    .gateway-wrapper {
+    .gateway-container {
       flex: 1;
-      max-width: 40rem;
       margin: 0 auto;
       /* 确保表单主体居中呈现 */
       width: 100%;
@@ -77,7 +76,7 @@
 </head>
 
 <body class="gateway-page">
-  <div class="gateway-wrapper">
+  <div class="gateway-container">
     <th:block th:replace="${body}" />
 
     <!-- 用户协议与隐私条款 -->
