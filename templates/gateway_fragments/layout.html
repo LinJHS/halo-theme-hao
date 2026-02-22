@@ -1,98 +1,172 @@
 <!DOCTYPE html>
-<html th:lang="${#locale.toLanguageTag}" th:fragment="layout(title, head, body)" xmlns:th="http://www.thymeleaf.org">
+<html th:lang="${#locale.toLanguageTag}" th:fragment="layout(title, head, body)" xmlns:th="http://www.thymeleaf.org"
+    th:with="assets_link=${theme.config.other.staticResource.use == 'custom' ? theme.config.other.staticResource.cdn_link : #theme.assets('/')},
+      theme_version = ${ theme.config.other.staticResource.use == 'local' ? '?v='+ theme.spec.version : ''},
+      siteTitle = ${not #strings.isEmpty(title) ?  title  :  #strings.isEmpty(site.subtitle) ? site.title :  site.title +' - ' +site.subtitle }">
 
-<!-- 引用浩主题的全局 layout -->
-<th:block
-    th:replace="~{modules/layouts/layout :: layout(content = ~{::authContent}, htmlType = 'auth', title = ${title}, head = ~{::authHead})}">
+<head>
+    <meta charset="UTF-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width,initial-scale=1" name="viewport">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="var(--heo-card-bg)" name="theme-color">
+    <title th:text="${siteTitle}"></title>
 
-    <!-- 附加给 head 的内容，包含认证所需的 Halo 默认静态资源 -->
-    <th:block th:fragment="authHead">
-        <th:block th:replace="~{gateway_fragments/common::basicStaticResources}"></th:block>
-        <th:block th:if="${head != null}">
-            <th:block th:replace="${head}" />
-        </th:block>
-        <style>
-            /* 调整表单的基本样式以适配由于引入 Hao 导致的一些冲突或者不协调 */
-            .auth-container {
-                max-width: 400px;
-                margin: 50px auto;
-                background: var(--heo-card-bg);
-                padding: 30px;
-                border-radius: 12px;
-                box-shadow: var(--heo-shadow-border);
-            }
+    <link rel="shortcut icon"
+        th:href="@{${#strings.isEmpty(site.favicon) ? assets_link + '/images/hao-logo.jpg' : site.favicon}}" />
 
-            .auth-container .halo-form-wrapper {
-                margin: 0;
-            }
+    <!-- Halo Auth 基础资源 -->
+    <th:block th:replace="~{gateway_fragments/common::basicStaticResources}"></th:block>
 
-            .auth-container .gateway-wrapper {
-                padding: 0;
-                background: transparent;
-                box-shadow: none;
-            }
+    <!-- Hao Theme 必要样式 -->
+    <link rel="stylesheet" th:href="${assets_link + '/zhheo/zhheoblog.css' + theme_version}">
+    <link rel="stylesheet" th:href="${assets_link + '/zhheo/custom.css' + theme_version}">
+    <link rel="stylesheet" th:href="${assets_link + '/icon/iconfont.css' + theme_version}">
 
-            .auth-container input {
-                background: var(--heo-background);
-                color: var(--heo-fontcolor);
-            }
+    <!-- Hao 配置注入 -->
+    <th:block th:replace="~{modules/variables/site-config}" />
 
-            .auth-container button[type="submit"] {
-                background: var(--heo-main);
-                color: var(--heo-white);
-                border: none;
-                padding: 10px 20px;
-                border-radius: 8px;
-                cursor: pointer;
-                transition: 0.3s;
-            }
-
-            .auth-container button[type="submit"]:hover {
-                background: var(--heo-main-op-deep);
-            }
-
-            .auth-container .halo-logo {
-                display: none;
-            }
-
-            .auth-agreement {
-                margin-top: 20px;
-                text-align: center;
-                font-size: 13px;
-                color: var(--heo-fontcolor);
-                opacity: 0.8;
-            }
-
-            .auth-agreement a {
-                color: var(--heo-main);
-                text-decoration: none;
-                transition: 0.3s;
-            }
-
-            .auth-agreement a:hover {
-                color: var(--heo-main-op-deep);
-            }
-        </style>
+    <!-- 网关传入的 head -->
+    <th:block th:if="${head != null}">
+        <th:block th:replace="${head}" />
     </th:block>
 
-    <!-- 附加给 content 的内容，即页面主内容区域 -->
-    <th:block th:fragment="authContent">
-        <main class="layout" id="content-inner">
-            <div id="page">
-                <h1 class="page-title" th:text="${title}">认证</h1>
-                <div class="auth-container">
-                    <th:block th:replace="${body}" />
-                    <div class="auth-agreement">
-                        登录或注册即充分理解并同意
-                        <a href="/terms" target="_blank">《用户协议》</a>
-                        和
-                        <a href="/privacy" target="_blank">《隐私条款》</a>
-                    </div>
-                </div>
-            </div>
-        </main>
-    </th:block>
+    <style>
+        body {
+            background-color: var(--heo-background);
+            color: var(--heo-fontcolor);
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
 
-</th:block>
+        .auth-container {
+            width: 100%;
+            max-width: 400px;
+            background: var(--heo-card-bg);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: var(--heo-shadow-border);
+            margin: 20px;
+            z-index: 10;
+        }
+
+        .auth-container .halo-form-wrapper {
+            margin: 0;
+        }
+
+        .auth-container .gateway-wrapper {
+            padding: 0;
+            background: transparent;
+            box-shadow: none;
+        }
+
+        /* 覆盖 Halo 默认在登录页面的表单样式为主题样式 */
+        .auth-container input {
+            background: var(--heo-background);
+            color: var(--heo-fontcolor);
+            border: 1px solid var(--heo-border);
+        }
+
+        .auth-container button[type="submit"] {
+            background: var(--heo-main);
+            color: var(--heo-white);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+            width: 100%;
+        }
+
+        .auth-container button[type="submit"]:hover {
+            background: var(--heo-main-op-deep);
+        }
+
+        .auth-container .halo-logo {
+            display: flex;
+        }
+
+        /* 处理全局背景图片 */
+        .global_background_img {
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            opacity: 1;
+            position: fixed;
+            z-index: -999;
+            background: var(--heo-background);
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        /* 用户协议与隐私条款样式 */
+        .auth-agreement {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 13px;
+            color: var(--heo-fontcolor);
+            opacity: 0.8;
+        }
+
+        .auth-agreement a {
+            color: var(--heo-main);
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .auth-agreement a:hover {
+            color: var(--heo-main-op-deep);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 根据配置设置 css 变量值，全局 css 通过变量值进行处理以自适应深色浅色模式 -->
+    <th:block th:replace="~{'modules/variables/layout'}"></th:block>
+
+    <!-- 独立背景，避免复杂逻辑 -->
+    <div id="web_bg">
+        <div th:if="${theme.config.top.global_background.enable_global_background_img}">
+            <img class="global_background_img" th:src="${theme.config.top.global_background.global_background_img}" />
+        </div>
+    </div>
+
+    <!-- 认证主体容器 -->
+    <div class="auth-container">
+        <!-- 核心表单内容区 -->
+        <th:block th:replace="${body}" />
+
+        <!-- 协议与条款 -->
+        <div class="auth-agreement">
+            登录或注册即充分理解并同意
+            <a href="/terms" target="_blank">《用户协议》</a>
+            和
+            <a href="/privacy" target="_blank">《隐私条款》</a>
+        </div>
+    </div>
+
+    <!-- 简易的深浅模式支持 -->
+    <script>
+        (function () {
+            try {
+                const t = JSON.parse(localStorage.getItem('theme'))?.value;
+                if (t === 'dark' || (!t && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                    document.documentElement.classList.add('color-scheme-dark');
+                }
+            } catch (e) {
+                // Ignore parsing errors
+                if (localStorage.getItem('theme') === 'dark') {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                }
+            }
+        })();
+    </script>
+</body>
 
 </html>
