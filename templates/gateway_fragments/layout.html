@@ -13,7 +13,7 @@
   <title th:text="${title}"></title>
   <link rel="preload" href="/images/wordmark.svg" as="image" type="image/svg+xml" />
   <link rel="preload" href="/images/logo.png" as="image" type="image/png" />
-  <link rel="stylesheet" th:href="${assets_link + '/zhheo/zhheoblog.css' + theme_version}">
+  <link rel="stylesheet" th:href="${assets_link + '/zhheo/zhheoblog.css'}">
 
   <th:block th:replace="~{gateway_fragments/common::basicStaticResources}"></th:block>
 
@@ -47,10 +47,9 @@
       background: var(--heo-background);
     }
 
-    /* 页面拉通防止页脚浮空 */
-
     .gateway-wrapper {
       flex: 1;
+      max-width: 64rem;
     }
 
     #footer {
@@ -89,9 +88,9 @@
       });
     </script>
   </div>
+  <!-- 底部 -->
+  <footer th:replace="~{modules/footer-shop}" />
 
-  <!-- 追加原主题配置好的页面底部 Footer -->
-  <th:block th:replace="~{modules/footer}" />
 </body>
 
 </html>
