@@ -1,14 +1,12 @@
 <!doctype html>
-<html
-  xmlns:th="https://www.thymeleaf.org"
-  th:replace="~{shop/layout :: html(title = '商店 - 丘原科技在线商城', htmlType = 'products', content = ~{::content})}"
->
+<html xmlns:th="https://www.thymeleaf.org"
+  th:replace="~{shop/layout :: html(title = '商店 - 丘原科技在线商城', htmlType = 'products', content = ~{::content})}">
 <th:block th:fragment="content">
-<div class="page" id="body-wrap">
-  <!-- 头部导航栏 -->
-  <header class="not-top-img" id="page-header">
-    <nav th:replace="~{modules/nav-shop :: nav(title = '丘原科技在线商城')}"></nav>
-  </header>
+  <div class="page" id="body-wrap">
+    <!-- 头部导航栏 -->
+    <header class="not-top-img" id="page-header">
+      <nav th:replace="~{modules/nav-shop :: nav(title = '丘原科技在线商城')}"></nav>
+    </header>
     <!--/* 商品列表模板片段 */-->
     <div class="shop-entry">
       <div class="shop-entry__header">
@@ -20,46 +18,25 @@
         <div class="shop-filter__left">
           <select class="shop-select" id="category-select">
             <option value="">全部分类</option>
-            <option
-              th:each="category : ${categoryTree}"
-              th:value="${category.id}"
-              th:text="${category.name}"
-              th:selected="${#lists.contains(param.categoryId, #strings.toString(category.id))}"
-            ></option>
+            <option th:each="category : ${categoryTree}" th:value="${category.id}" th:text="${category.name}"
+              th:selected="${#lists.contains(param.categoryId, #strings.toString(category.id))}"></option>
           </select>
-          <input
-            type="text"
-            class="shop-input"
-            id="search-input"
-            placeholder="搜索商品..."
-            th:value="${param.keyword != null && !param.keyword.empty ? param.keyword[0] : ''}"
-          />
+          <input type="text" class="shop-input" id="search-input" placeholder="搜索商品..."
+            th:value="${param.keyword != null && !param.keyword.empty ? param.keyword[0] : ''}" />
         </div>
 
         <div class="shop-filter__right">
           <select class="shop-select" id="sort-select">
-            <option
-              value=""
-              th:selected="${param.sort == null || param.sort.empty}"
-            >
+            <option value="" th:selected="${param.sort == null || param.sort.empty}">
               默认排序
             </option>
-            <option
-              value="minPrice,asc"
-              th:selected="${#lists.contains(param.sort, 'minPrice,asc')}"
-            >
+            <option value="minPrice,asc" th:selected="${#lists.contains(param.sort, 'minPrice,asc')}">
               价格从低到高
             </option>
-            <option
-              value="minPrice,desc"
-              th:selected="${#lists.contains(param.sort, 'minPrice,desc')}"
-            >
+            <option value="minPrice,desc" th:selected="${#lists.contains(param.sort, 'minPrice,desc')}">
               价格从高到低
             </option>
-            <option
-              value="title,asc"
-              th:selected="${#lists.contains(param.sort, 'title,asc')}"
-            >
+            <option value="title,asc" th:selected="${#lists.contains(param.sort, 'title,asc')}">
               按名称排序
             </option>
           </select>
@@ -92,6 +69,12 @@
             window.location.href = url.toString();
           }
 
+          function goToPage(page) {
+            const url = new URL(window.location.href);
+            url.searchParams.set("page", page);
+            window.location.href = url.toString();
+          }
+
           categorySelect.addEventListener("change", function () {
             updateFilters({ categoryId: this.value });
           });
@@ -106,49 +89,55 @@
           sortSelect.addEventListener("change", function () {
             updateFilters({ sort: this.value });
           });
+
+          document.addEventListener("click", function (event) {
+            const button = event.target.closest(".shop-pagination__button[data-page]");
+
+            if (!button || button.disabled) {
+              return;
+            }
+
+            goToPage(button.dataset.page);
+          });
         })();
       </script>
 
       <div class="shop-product-list">
-        <a
-          th:each="product : ${productPage.content}"
-          th:href="@{/shop/product/{id}(id=${product.id})}"
-          class="shop-product-card"
-        >
-          <div
-            th:unless="${#strings.isEmpty(product.coverImageUrl)}"
-            class="shop-product-card__image"
-          >
+        <a th:each="product : ${productPage.items}" th:href="@{/shop/product/{id}(id=${product.id})}"
+          class="shop-product-card">
+          <div th:unless="${#strings.isEmpty(product.coverImageUrl)}" class="shop-product-card__image">
             <img th:src="${product.coverImageUrl}" th:alt="${product.title}" />
           </div>
           <div class="shop-product-card__info">
             <h3 class="shop-product-card__name" th:text="${product.title}"></h3>
-            <p
-              class="shop-product-card__description"
-              th:text="${product.description}"
-            ></p>
-            <div
-              th:if="${product.minPrice != null or product.minOriginalPrice != null}"
-              class="shop-product-card__footer"
-            >
+            <p class="shop-product-card__description" th:text="${product.description}"></p>
+            <div th:if="${product.minPrice != null or product.minOriginalPrice != null}"
+              class="shop-product-card__footer">
               <div class="shop-product-card__price">
-                <span
-                  class="shop-product-card__price-current"
-                  th:text="${product.minPrice}"
-                ></span>
-                <s
-                  th:if="${product.minOriginalPrice != null}"
-                  class="shop-product-card__price-original"
-                  th:text="${product.minOriginalPrice}"
-                ></s>
+                <span class="shop-product-card__price-current" th:text="${product.minPrice}"></span>
+                <s th:if="${product.minOriginalPrice != null}" class="shop-product-card__price-original"
+                  th:text="${product.minOriginalPrice}"></s>
               </div>
             </div>
           </div>
         </a>
       </div>
+
+      <div class="shop-pagination" th:if="${productPage.totalPages > 0}">
+        <button type="button" class="shop-btn shop-btn-secondary shop-btn-sm shop-pagination__button"
+          th:disabled="${!productPage.hasPrevious()}" th:attr="data-page=${productPage.page-1}">
+          上一页
+        </button>
+        <span class="shop-pagination__info" th:text="|${productPage.page}/${productPage.totalPages}|"></span>
+        <button type="button" class="shop-btn shop-btn-secondary shop-btn-sm shop-pagination__button"
+          th:disabled="${!productPage.hasNext()}" th:attr="data-page=${productPage.page+1}">
+          下一页
+        </button>
+      </div>
     </div>
-  <!-- 底部 -->
-  <footer th:replace="~{modules/footer-shop}" />
+    <!-- 底部 -->
+    <footer th:replace="~{modules/footer-shop}" />
   </div>
 </th:block>
+
 </html>
