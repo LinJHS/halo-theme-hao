@@ -33,6 +33,7 @@
                     </th:block>
 
                     <th:block th:if="${#lists.isEmpty(menuItem.children)}">
+                        <div class="back-menu-list-title" th:text="${menuItem.status.displayName}"></div>
                         <div class="back-menu-list">
                             <a class="back-menu-item" rel="external nofollow"
                                th:target="${menuItem.spec.target?.value}"
