@@ -30,7 +30,20 @@
                                 </a>
                             </th:block>
                         </div>
+                    </th:block>
 
+                    <th:block th:if="${#lists.isEmpty(menuItem.children)}">
+                        <div class="back-menu-list">
+                            <a class="back-menu-item" rel="external nofollow"
+                               th:target="${menuItem.spec.target?.value}"
+                               th:href="@{${menuItem.status.href}}">
+                                <!-- icon -->
+                                <img th:if="${!#strings.isEmpty(#annotations.getOrDefault(menuItem, 'icon', ''))}"
+                                     class="back-menu-item-icon"
+                                     th:src="${#annotations.getOrDefault(menuItem, 'icon', '')}">
+                                <span class="back-menu-item-text" th:text="${menuItem.status.displayName}"></span>
+                            </a>
+                        </div>
                     </th:block>
                 </div>
 
@@ -40,6 +53,23 @@
         >
             <div class="menus_items">
                 <div class="menus_item" th:each="menuItem : ${menuFinder.getPrimary().menuItems}">
+                    <th:block th:if="${#lists.isEmpty(menuItem.children)}">
+                        <a class="site-page" rel="external nofollow"
+                           th:target="${menuItem.spec.target?.value}"
+                           th:href="@{${menuItem.status.href}}">
+                            <th:block th:if="${theme.config.nav.menus.enable_ali_iconfont_symbol_header}">
+                                <svg class="ali_icon" aria-hidden="true">
+                                    <use th:href="${#annotations.getOrDefault(menuItem, 'icon','jiewen joe-icon-zuzhijiagou')}"></use>
+                                </svg>
+                            </th:block>
+                            <th:block th:if="${!theme.config.nav.menus.enable_ali_iconfont_symbol_header}">
+                                <i th:if="${!#strings.isEmpty(#annotations.getOrDefault(menuItem, 'icon', ''))}"
+                                   th:class="${#annotations.getOrDefault(menuItem, 'icon', '')}"></i>
+                            </th:block>
+                            <span th:text="${menuItem.status.displayName}"></span>
+                        </a>
+                    </th:block>
+
                     <th:block th:if="${not #lists.isEmpty(menuItem.children)}">
                         <a class="site-page" href="javascript:void(0);" rel="external nofollow">
                             <span th:text="${menuItem.status.displayName}"></span>
